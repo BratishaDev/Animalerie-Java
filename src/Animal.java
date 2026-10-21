@@ -28,6 +28,10 @@ public abstract class  Animal {
         return santé;
     }
 
+    public void setSanté(EtatSante santé) {
+        this.santé = santé;
+    }
+
     public abstract String bruit();
 
     public abstract String soinQuotidien();
