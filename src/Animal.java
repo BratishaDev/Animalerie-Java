@@ -34,4 +34,9 @@ public abstract class  Animal {
     public abstract String bruit();
 
     public abstract String soinQuotidien();
+
+    @Override
+    public String toString() {
+        return "Nom: " + nom + "  |  Âge: " + age + "  |  Santé: " + sante.getName() + "  ";
+    }
 }
