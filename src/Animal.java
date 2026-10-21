@@ -1,35 +1,34 @@
 public abstract class  Animal {
 
-    private String nom;
-    private int âge;
-    private EtatSante santé;
+    private final String nom;
+    private int age;
+    private EtatSante sante = EtatSante.SAIN;
 
     Animal(String nom, int age){
         this.nom = nom;
-        this.âge = age;
-        this.santé = EtatSante.SAIN;
+        this.age = age;
     }
 
-    Animal(String nom, int age, EtatSante santé){
+    Animal(String nom, int age, EtatSante sante){
         this.nom = nom;
-        this.âge = age;
-        this.santé = santé;
+        this.age = age;
+        this.sante = sante;
     }
 
     public String getNom() {
         return nom;
     }
 
-    public int getÂge() {
-        return âge;
+    public int getAge() {
+        return age;
     }
 
-    public EtatSante getSanté() {
-        return santé;
+    public EtatSante getSante() {
+        return sante;
     }
 
-    public void setSanté(EtatSante santé) {
-        this.santé = santé;
+    public void setSante(EtatSante sante) {
+        this.sante = sante;
     }
 
     public abstract String bruit();
