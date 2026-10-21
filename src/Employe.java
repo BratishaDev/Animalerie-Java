@@ -22,8 +22,10 @@ public abstract class Employe {
         return salaire;
     }
 
-    public abstract String effectuerTache();
+    public abstract String effectuerTache(Animal animal);
 
-    public abstract String getRole();
+    public String getRole(){
+        return this.getClass().getSimpleName();
+    }
 
 }
