@@ -1,19 +1,45 @@
+import java.util.ArrayList;
+
 public class Main {
 
+    static void ajouterAnimal(ArrayList<Animal> animales, Animal animal){
+        animales.add(animal);
+    }
+
+    static void supprimerAnimal(ArrayList<Animal> animales, Animal animal){
+        animales.remove(animal);
+    }
+
+    static void ajouterEmploye(ArrayList<Employe> employes, Employe employe){
+        employes.add(employe);
+    }
+
+    static void supprimerEmploye(ArrayList<Employe> employes, Employe employe){
+        employes.remove(employe);
+    }
+
+    static void effectuerTache(Employe employe, Animal animal){
+        System.out.println(employe.effectuerTache(animal));
+    }
+
     public static void main(String[] args) {
-        Employe Bob = new Soigneur("Bab", "Bob", 5000);
-        Employe Lexa = new Veterinaire("sydorov", "Lexa", 8000 );
-        Animal sobak = new Chien("persik", 5, EtatSante.SOIN_INTENSIF);
-        Animal crol = new Lapin("morkov", 2, EtatSante.SAIN);
-        Animal kot = new Chat("jorik", 3, EtatSante.SOIN_LEGER);
+        ArrayList<Animal> Animales = new ArrayList<>();
+        ArrayList<Employe> Employes = new ArrayList<>();
 
-        System.out.println(Bob.effectuerTache(sobak));
-        System.out.println(Lexa.effectuerTache(sobak));
-        System.out.println(Lexa.effectuerTache(sobak));
-        System.out.println(Lexa.effectuerTache(sobak));
-        System.out.println(Bob.effectuerTache(crol));
-        System.out.println(Bob.effectuerTache(kot));
+        ajouterAnimal(Animales, new Chat("Murka", 7, EtatSante.SOIN_INTENSIF));
+        ajouterAnimal(Animales, new Chat("Jorik", 3, EtatSante.SOIN_LEGER));
+        ajouterAnimal(Animales, new Lapin("Morkov", 2, EtatSante.SAIN));
+        ajouterAnimal(Animales, new Chien("persik", 5, EtatSante.SOIN_INTENSIF));
 
+        ajouterEmploye(Employes, new Soigneur("Gigachad", "Bob", 5000));
+        ajouterEmploye(Employes, new Veterinaire("Sydorov", "Lexa", 8000 ));
+        ajouterEmploye(Employes, new Soigneur("Tihonov", "Maxim", 5000));
+
+        ConsoleIO.listerEmployes(Employes);
+        ConsoleIO.listerAnimales(Animales);
+
+        effectuerTache(Employes.get(1), Animales.get(0));
+        effectuerTache(Employes.get(1), Animales.get(1));
 
     }
 }
