@@ -10,12 +10,12 @@ public class Lapin extends Animal{
 
     @Override
     public String bruit() {
-        return "???";
+        return "Honk honk";
     }
 
     @Override
     public String soinQuotidien() {
-        return "???";
+        return "Alimentation et nettoyage";
     }
 
 }
