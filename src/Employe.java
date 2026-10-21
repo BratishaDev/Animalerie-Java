@@ -30,6 +30,6 @@ public abstract class Employe {
 
     @Override
     public String toString() {
-        return "Nom: " + nom + ";  prenom: " + prenom + ";  salaire: " + salaire + "CHF";
+        return "Nom: " + nom + "  |  prenom: " + prenom + "  |  salaire: " + salaire + " CHF";
     }
 }
