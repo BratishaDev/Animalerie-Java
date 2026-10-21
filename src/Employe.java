@@ -28,4 +28,8 @@ public abstract class Employe {
         return this.getClass().getSimpleName();
     }
 
+    @Override
+    public String toString() {
+        return "Nom: " + nom + ";  prenom: " + prenom + ";  salaire: " + salaire + "CHF";
+    }
 }
