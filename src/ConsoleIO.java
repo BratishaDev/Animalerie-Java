@@ -10,6 +10,4 @@ public class ConsoleIO {
         animales.forEach(animal -> System.out.println(animal.toString()));
     }
 
-
-
 }

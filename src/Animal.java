@@ -37,6 +37,14 @@ public abstract class  Animal {
 
     @Override
     public String toString() {
-        return "Nom: " + nom + "  |  Âge: " + age + "  |  Santé: " + sante.getName() + "  ";
+        String description;
+        description = "Espèce: " + getClass().getSimpleName() + "  |  Nom: " + nom + "  |  Âge: " + age;
+        if(age == 1) {
+            description += " an";
+        } else {
+            description += " ans";
+        }
+        description += "  |  Santé: " + sante.getName();
+        return description;
     }
 }
