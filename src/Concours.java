@@ -28,21 +28,21 @@ public class Concours {
         Collections.shuffle(classement);
     }
 
-    public void afficherConcours(){
-        System.out.println( "Nom de concour: " + nom +
+    public String rendreConcours(){
+        String resultat;
+        resultat = "Nom de concour: " + nom +
                             "\nLieu de concour: " + lieu +
-                            "\nNombre de participants: " + participants.size() +
-                            "\nListe des participants: "
-        );
-        ConsoleIO.listerAnimales(participants);
-        System.out.println();
+                            "\nNombre de participants: " + participants.size();
+        return resultat;
     }
 
-    public void afficherClassement(){
-        System.out.println("Classement de concours: ");
+    public String rendreClassement(){
+        StringBuilder resultat = new StringBuilder("Classement de concours: \n");
         for(int index = 0; index < classement.size(); index++){
-            System.out.println("{" + (index + 1) + "} " + classement.get(index));
-        }
-    }
+            resultat.append("{").append(index + 1).append("} ")
+                    .append(classement.get(index)).append("\n");
 
+        }
+        return resultat.toString();
+    }
 }
