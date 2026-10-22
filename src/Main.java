@@ -25,7 +25,7 @@ public class Main {
     public static void main(String[] args) {
         ArrayList<Animal> Animales = new ArrayList<>();
         ArrayList<Employe> Employes = new ArrayList<>();
-
+/*
         ajouterAnimal(Animales, new Chat("Murka", 7, EtatSante.SOIN_INTENSIF));
         ajouterAnimal(Animales, new Chat("Jorik", 3, EtatSante.SOIN_LEGER));
         ajouterAnimal(Animales, new Lapin("Morkov", 2, EtatSante.SAIN));
@@ -40,6 +40,17 @@ public class Main {
 
         effectuerTache(Employes.get(1), Animales.get(0));
         effectuerTache(Employes.get(1), Animales.get(1));
+*/
+        Concours concours = new Concours("Test", "Porrentruy", 10);
+        concours.inscrireAnimal(new Chat("Jorik", 3, EtatSante.SOIN_LEGER));
+        concours.inscrireAnimal(new Lapin("Morkov", 2, EtatSante.SAIN));
+        concours.inscrireAnimal(new Chien("persik", 5, EtatSante.SAIN));
+        concours.inscrireAnimal(new Chat("Murka", 7, EtatSante.SAIN));
+        concours.inscrireAnimal(new Chat("Mur", 1, EtatSante.SAIN));
+
+        concours.lancerConcours();
+        concours.afficherConcours();
+        concours.afficherClassement();
 
     }
 }
