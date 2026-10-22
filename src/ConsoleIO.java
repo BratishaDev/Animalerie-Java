@@ -10,4 +10,8 @@ public class ConsoleIO {
         animales.forEach(animal -> System.out.println(animal.toString()));
     }
 
+    static void afficherText(String text){
+        System.out.println(text);
+    };
+
 }

@@ -49,8 +49,8 @@ public class Main {
         concours.inscrireAnimal(new Chat("Mur", 1, EtatSante.SAIN));
 
         concours.lancerConcours();
-        concours.afficherConcours();
-        concours.afficherClassement();
+        ConsoleIO.afficherText(concours.rendreConcours());
+        ConsoleIO.afficherText(concours.rendreClassement());
 
     }
 }
