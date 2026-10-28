@@ -19,21 +19,25 @@ public class Concours {
 
     public Resultat inscrireAnimal(Animal animal) {
         if (animal.getSante() != EtatSante.SAIN) {
-            return Resultat.erreur(animal.getNom() + " n'est pas sain");
+            return Resultat.erreur(animal.getNom() + " n'est pas sain.");
         }
         if (participants.contains(animal)) {
-            return Resultat.erreur(animal.getNom() + " est déjà inscrit");
+            return Resultat.erreur(animal.getNom() + " est déjà inscrit.");
         }
         if (participants.size() >= capacite) {
-            return Resultat.erreur("Le concours est complet");
+            return Resultat.erreur("Le concours est complet.");
         }
         participants.add(animal);
-        return Resultat.ok(animal.getNom() + " a été inscrit au concours");
+        return Resultat.ok(animal.getNom() + " a été inscrit au concours.");
     }
 
-    public void lancerConcours(){
+    public Resultat lancerConcours(){
+        if(!participants.isEmpty()) {
             classement = new ArrayList<>(participants);
             Collections.shuffle(classement);
+            return Resultat.ok("Le concours a été lancé avec succès");
+        }
+        return Resultat.erreur("La liste des participants est vide.");
     }
 
     public String rendreConcours(){
@@ -44,13 +48,16 @@ public class Concours {
         return resultat;
     }
 
-    public String rendreClassement(){
-        StringBuilder resultat = new StringBuilder("Classement de concours: \n");
-        for(int index = 0; index < classement.size(); index++){
-            resultat.append("{").append(index + 1).append("} ")
-                    .append(classement.get(index)).append("\n");
+    public Resultat rendreClassement(){
+        if(!classement.isEmpty()) {
+            StringBuilder resultat = new StringBuilder("Classement de concours: \n");
+            for (int index = 0; index < classement.size(); index++) {
+                resultat.append("{").append(index + 1).append("} ")
+                        .append(classement.get(index)).append("\n");
 
+            }
+            return Resultat.ok(resultat.toString());
         }
-        return resultat.toString();
+        return Resultat.erreur("Le classement est vide");
     }
 }
