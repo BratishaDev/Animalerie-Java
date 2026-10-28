@@ -10,6 +10,14 @@ public class ConsoleIO {
         animales.forEach(animal -> System.out.println(animal.toString()));
     }
 
+    static void listerOptions(ArrayList<Option> options){
+        options.forEach(option -> System.out.println(option.toString()));
+    }
+
+    static void listerConcours(ArrayList<Concours> concours){
+        concours.forEach(c -> System.out.println(c.toString()));
+    }
+
     static void afficherText(String text){
         System.out.println(text);
     }
