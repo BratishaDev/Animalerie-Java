@@ -26,15 +26,11 @@ public class Main {
 
     }
 
-    static void choisirAction(){
-
-    }
-
-
 
     public static void main(String[] args) {
-        ArrayList<Animal> Animales = new ArrayList<>();
-        ArrayList<Employe> Employes = new ArrayList<>();
+        ArrayList<Animal> animales = new ArrayList<>();
+        ArrayList<Employe> employes = new ArrayList<>();
+        ArrayList<Concours> concours = new ArrayList<>();
 /*
         ajouterAnimal(Animales, new Chat("Murka", 7, EtatSante.SOIN_INTENSIF));
         ajouterAnimal(Animales, new Chat("Jorik", 3, EtatSante.SOIN_LEGER));
@@ -62,5 +58,8 @@ public class Main {
         ConsoleIO.afficherText(concours.rendreConcours());
         ConsoleIO.afficherText(concours.rendreClassement());
 */
+        ArrayList<Option> menuPrincipale = new ArrayList<>();
+        menuPrincipale.add(new Option("Lister les concours", () -> ConsoleIO.listerConcours(concours)));
+        menuPrincipale.add(new Option("Créer un concours", () -> concours.add(new Concours()));
     }
 }
