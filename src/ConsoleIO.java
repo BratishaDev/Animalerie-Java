@@ -12,6 +12,6 @@ public class ConsoleIO {
 
     static void afficherText(String text){
         System.out.println(text);
-    };
+    }
 
 }

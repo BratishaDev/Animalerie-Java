@@ -17,10 +17,19 @@ public class Concours {
         this.classement = new ArrayList<>();
     }
 
-    public void inscrireAnimal(Animal animal){
-        if(animal.getSante() == EtatSante.SAIN && !participants.contains(animal) && participants.size() < capacite){
+    public String inscrireAnimal(Animal animal){
+        String message;
+        if(animal.getSante() == EtatSante.SAIN){
+            message = "Erreur: L'animal n'est pas sain";
+        } else if (!participants.contains(animal)){
+            message = "Erreur: L'animal est deja inscrit";
+        } else if (participants.size() < capacite) {
+            message = "Erreur: Le concours est complet";
+        } else {
             participants.add(animal);
+            message = "L'animal a été inscrit au concours";
         }
+        return message;
     }
 
     public void lancerConcours(){

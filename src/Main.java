@@ -22,6 +22,16 @@ public class Main {
         System.out.println(employe.effectuerTache(animal));
     }
 
+    static void afficherListInteractif(){
+
+    }
+
+    static void choisirAction(){
+
+    }
+
+
+
     public static void main(String[] args) {
         ArrayList<Animal> Animales = new ArrayList<>();
         ArrayList<Employe> Employes = new ArrayList<>();
@@ -40,7 +50,7 @@ public class Main {
 
         effectuerTache(Employes.get(1), Animales.get(0));
         effectuerTache(Employes.get(1), Animales.get(1));
-*/
+
         Concours concours = new Concours("Test", "Porrentruy", 10);
         concours.inscrireAnimal(new Chat("Jorik", 3, EtatSante.SOIN_LEGER));
         concours.inscrireAnimal(new Lapin("Morkov", 2, EtatSante.SAIN));
@@ -51,6 +61,6 @@ public class Main {
         concours.lancerConcours();
         ConsoleIO.afficherText(concours.rendreConcours());
         ConsoleIO.afficherText(concours.rendreClassement());
-
+*/
     }
 }
