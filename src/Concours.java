@@ -17,24 +17,23 @@ public class Concours {
         this.classement = new ArrayList<>();
     }
 
-    public String inscrireAnimal(Animal animal){
-        String message;
-        if(animal.getSante() == EtatSante.SAIN){
-            message = "Erreur: L'animal n'est pas sain";
-        } else if (!participants.contains(animal)){
-            message = "Erreur: L'animal est deja inscrit";
-        } else if (participants.size() < capacite) {
-            message = "Erreur: Le concours est complet";
-        } else {
-            participants.add(animal);
-            message = "L'animal a été inscrit au concours";
+    public Resultat inscrireAnimal(Animal animal) {
+        if (animal.getSante() != EtatSante.SAIN) {
+            return Resultat.erreur(animal.getNom() + " n'est pas sain");
         }
-        return message;
+        if (participants.contains(animal)) {
+            return Resultat.erreur(animal.getNom() + " est déjà inscrit");
+        }
+        if (participants.size() >= capacite) {
+            return Resultat.erreur("Le concours est complet");
+        }
+        participants.add(animal);
+        return Resultat.ok(animal.getNom() + " a été inscrit au concours");
     }
 
     public void lancerConcours(){
-        classement = new ArrayList<>(participants);
-        Collections.shuffle(classement);
+            classement = new ArrayList<>(participants);
+            Collections.shuffle(classement);
     }
 
     public String rendreConcours(){
