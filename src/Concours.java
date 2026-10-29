@@ -42,9 +42,9 @@ public class Concours {
 
     public String rendreConcours(){
         String resultat;
-        resultat = "Nom de concour: " + nom +
-                            "\nLieu de concour: " + lieu +
-                            "\nNombre de participants: " + participants.size();
+        resultat = "| Nom: " + nom +
+                            "\n| Lieu: " + lieu +
+                            "\n| Participants: " + participants.size();
         return resultat;
     }
 
@@ -59,5 +59,9 @@ public class Concours {
             return Resultat.ok(resultat.toString());
         }
         return Resultat.erreur("Le classement est vide");
+    }
+
+    public String getNom() {
+        return nom;
     }
 }
