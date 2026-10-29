@@ -13,16 +13,35 @@ public class ConsoleIO {
         animales.forEach(animal -> System.out.println(animal.toString()));
     }
 
-    static void listerOptions(ArrayList<Option> options){
-        options.forEach(option -> System.out.println(option.toString()));
+    static void listerOptions(ArrayList<Option> options) {
+        for (int index = 0; index < options.size(); index++) {
+            System.out.println("[" + (index + 1) + "] " + options.get(index).label());
+        }
     }
 
     static void listerConcours(ArrayList<Concours> concours){
-        concours.forEach(c -> System.out.println(c.toString()));
+        for (int index = 0; index < concours.size(); index++) {
+            System.out.println("[" + (index + 1) + "] " + "\n" + "_____________________");
+            afficherText(concours.get(index).rendreConcours());
+            System.out.println("_____________________");
+        }
     }
 
     static void afficherText(String text){
         System.out.println(text);
+    }
+
+    static int lireChoix(String message, int nombreMin, int nombreMax){
+        int choix = demanderNombreEntier(message);
+        boolean valide = false;
+        do {
+            if(choix >= nombreMin || choix <= nombreMax){
+                valide = true;
+            } else {
+                System.out.println("le nombre doit être entre " + nombreMin + " et " + nombreMax);
+            }
+        } while(!valide);
+        return choix;
     }
 
     static String demanderString(String message){
@@ -52,7 +71,7 @@ public class ConsoleIO {
             } else {
                 try {
                     saisiInt = Integer.parseInt(stringSaisi);
-                    valide = true;   // сюда дойдём, только если parseInt не бросил ошибку
+                    valide = true;
                 } catch (NumberFormatException e) {
                     System.out.println("\"" + stringSaisi + "\" n'est pas un nombre entier. Veuillez réessayer.");
                 }
@@ -62,10 +81,16 @@ public class ConsoleIO {
     }
 
     static Concours saisirConcours(){
-        String nom = demanderString("Entrer le nom de la Concours");;
-        String lieu = demanderString("Entrer le lieu de la Concours");;
-        int capacite = demanderNombreEntier("Entrer la capacité de la Concours");
+        String nom = demanderString("Entrer le nom de la Concours:");
+        String lieu = demanderString("Entrer le lieu de la Concours:");
+        int capacite = demanderNombreEntier("Entrer la capacité de la Concours:");
+        System.out.println("Le Concours " + nom + " a été crée avec succès.");
         return new Concours(nom, lieu, capacite);
+    }
+
+    static void attendreEntree() {
+        System.out.print("\nAppuyez sur Entrée pour continuer...");
+        scanner.nextLine();
     }
 
 }
