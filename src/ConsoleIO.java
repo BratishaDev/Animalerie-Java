@@ -1,6 +1,9 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class ConsoleIO {
+
+    private static final Scanner scanner = new Scanner(System.in);
 
     static void listerEmployes(ArrayList<Employe> employes){
         employes.forEach(employe -> System.out.println(employe.toString()));
@@ -20,6 +23,49 @@ public class ConsoleIO {
 
     static void afficherText(String text){
         System.out.println(text);
+    }
+
+    static String demanderString(String message){
+        System.out.println(message);
+        boolean valide = false;
+        String saisi;
+        do {
+            saisi = scanner.nextLine();
+            if(!saisi.isEmpty()){
+                valide = true;
+            } else {
+                System.out.println("Le saisie ne peut pas être vide. Veuillez réessayer.");
+            }
+        } while(!valide);
+        return saisi;
+    }
+
+    static int demanderNombreEntier(String message){
+        System.out.println(message);
+        boolean valide = false;
+        int saisiInt = 0;
+        do {
+            String stringSaisi;
+            stringSaisi = scanner.nextLine().trim();
+            if (stringSaisi.isEmpty()) {
+                System.out.println("La saisie ne peut pas être vide. Veuillez réessayer.");
+            } else {
+                try {
+                    saisiInt = Integer.parseInt(stringSaisi);
+                    valide = true;   // сюда дойдём, только если parseInt не бросил ошибку
+                } catch (NumberFormatException e) {
+                    System.out.println("\"" + stringSaisi + "\" n'est pas un nombre entier. Veuillez réessayer.");
+                }
+            }
+        } while(!valide);
+        return saisiInt;
+    }
+
+    static Concours saisirConcours(){
+        String nom = demanderString("Entrer le nom de la Concours");;
+        String lieu = demanderString("Entrer le lieu de la Concours");;
+        int capacite = demanderNombreEntier("Entrer la capacité de la Concours");
+        return new Concours(nom, lieu, capacite);
     }
 
 }

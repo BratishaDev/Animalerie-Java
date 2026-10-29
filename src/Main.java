@@ -60,6 +60,6 @@ public class Main {
 */
         ArrayList<Option> menuPrincipale = new ArrayList<>();
         menuPrincipale.add(new Option("Lister les concours", () -> ConsoleIO.listerConcours(concours)));
-        menuPrincipale.add(new Option("Créer un concours", () -> concours.add(new Concours()));
+        menuPrincipale.add(new Option("Créer un concours", () -> concours.add(ConsoleIO.saisirConcours())));
     }
 }
