@@ -1,3 +1,4 @@
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 
 public class Main {
@@ -22,8 +23,22 @@ public class Main {
         System.out.println(employe.effectuerTache(animal));
     }
 
-    static void afficherListInteractif(){
+    static void executerMenu(String titre, ArrayList<Option> options, String libelleZero) {
+        while (true) {
+            System.out.println("=== " + titre + " ===");
+            ConsoleIO.listerOptions(options);
+            System.out.println("[0] " + libelleZero);
 
+            int choix = ConsoleIO.lireChoix("Votre choix : ", 0, options.size());
+            if (choix == 0) {
+                return;
+            }
+            Option option = options.get(choix - 1);
+            option.action().run();
+            if (option.attendre()) {
+                ConsoleIO.attendreEntree();
+            }
+        }
     }
 
 
@@ -46,20 +61,20 @@ public class Main {
 
         effectuerTache(Employes.get(1), Animales.get(0));
         effectuerTache(Employes.get(1), Animales.get(1));
-
-        Concours concours = new Concours("Test", "Porrentruy", 10);
-        concours.inscrireAnimal(new Chat("Jorik", 3, EtatSante.SOIN_LEGER));
-        concours.inscrireAnimal(new Lapin("Morkov", 2, EtatSante.SAIN));
-        concours.inscrireAnimal(new Chien("persik", 5, EtatSante.SAIN));
-        concours.inscrireAnimal(new Chat("Murka", 7, EtatSante.SAIN));
-        concours.inscrireAnimal(new Chat("Mur", 1, EtatSante.SAIN));
-
-        concours.lancerConcours();
-        ConsoleIO.afficherText(concours.rendreConcours());
-        ConsoleIO.afficherText(concours.rendreClassement());
 */
+        Concours concours1 = new Concours("Test", "Porrentruy", 10);
+        concours1.inscrireAnimal(new Chat("Jorik", 3, EtatSante.SOIN_LEGER));
+        concours1.inscrireAnimal(new Lapin("Morkov", 2, EtatSante.SAIN));
+        concours1.inscrireAnimal(new Chien("persik", 5, EtatSante.SAIN));
+        concours1.inscrireAnimal(new Chat("Murka", 7, EtatSante.SAIN));
+        concours1.inscrireAnimal(new Chat("Mur", 1, EtatSante.SAIN));
+
+       concours.add(concours1);
+
         ArrayList<Option> menuPrincipale = new ArrayList<>();
         menuPrincipale.add(new Option("Lister les concours", () -> ConsoleIO.listerConcours(concours)));
         menuPrincipale.add(new Option("Créer un concours", () -> concours.add(ConsoleIO.saisirConcours())));
+
+        executerMenu("Menu principal", menuPrincipale, "Sortir");
     }
 }
