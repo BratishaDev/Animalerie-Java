@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.function.Function;
 
 public class Main {
 
@@ -40,7 +41,7 @@ public class Main {
         }
     }
 
-    static <T> void menuElement(String titre, ArrayList<T> elements,
+    static <T> void menuElement(String titre, ArrayList<T> elements, Function<T, String> nom,
                                 Runnable afficherListe, ArrayList<OptionElement<T>> actions) {
         T choisi = ConsoleIO.choisir(elements, afficherListe);
         if (choisi == null) {
@@ -50,7 +51,7 @@ public class Main {
         for (OptionElement<T> opt : actions) {
             options.add(new Option(opt.label(), () -> opt.action().accept(choisi)));
         }
-        executerMenu(titre, options, "Retour");
+        executerMenu(titre + " : " + nom.apply(choisi), options, "Retour");
     }
 
     private static ArrayList<OptionElement<Animal>> createActionsAnimal(ArrayList<Employe> employes, ArrayList<Animal> animales) {
@@ -120,13 +121,12 @@ public class Main {
 
         ArrayList<Option> menuPrincipale = new ArrayList<>();
         menuPrincipale.add(Option.sousMenu("Choisir un concours", () ->
-                menuElement("Concours", concours, () -> ConsoleIO.listerConcours(concours), actionsConcours)));
+                menuElement("Concours", concours, Concours::getNom, () -> ConsoleIO.listerConcours(concours), actionsConcours)));
         menuPrincipale.add(Option.sousMenu("Choisir un animal", () ->
-                menuElement("Animal", animales, () -> ConsoleIO.listerAnimales(animales), actionsAnimal)));
+                menuElement("Animal", animales, Animal::getNom, () -> ConsoleIO.listerAnimales(animales), actionsAnimal)));
         menuPrincipale.add(new Option("Créer un concours", () -> concours.add(ConsoleIO.saisirConcours())));
 
         executerMenu("Menu principal", menuPrincipale, "Sortir");
     }
-
 
 }
