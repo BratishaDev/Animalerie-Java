@@ -32,16 +32,13 @@ public class ConsoleIO {
     }
 
     static int lireChoix(String message, int nombreMin, int nombreMax){
-        int choix = demanderNombreEntier(message);
-        boolean valide = false;
-        do {
-            if(choix >= nombreMin || choix <= nombreMax){
-                valide = true;
-            } else {
-                System.out.println("le nombre doit être entre " + nombreMin + " et " + nombreMax);
+        while (true) {
+            int choix = demanderNombreEntier(message);
+            if (choix >= nombreMin && choix <= nombreMax) {
+                return choix;
             }
-        } while(!valide);
-        return choix;
+            System.out.println("Le nombre doit être entre " + nombreMin + " et " + nombreMax + ".");
+        }
     }
 
     static String demanderString(String message){
