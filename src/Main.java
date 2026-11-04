@@ -40,6 +40,19 @@ public class Main {
         }
     }
 
+    static <T> void menuElement(String titre, ArrayList<T> elements,
+                                Runnable afficherListe, ArrayList<OptionElement<T>> actions) {
+        T choisi = ConsoleIO.choisir(elements, afficherListe);
+        if (choisi == null) {
+            return;
+        }
+        ArrayList<Option> options = new ArrayList<>();
+        for (OptionElement<T> opt : actions) {
+            options.add(new Option(opt.label(), () -> opt.action().accept(choisi)));
+        }
+        executerMenu(titre, options, "Retour");
+    }
+
 
     public static void main(String[] args) {
         ArrayList<Animal> animales = new ArrayList<>();
