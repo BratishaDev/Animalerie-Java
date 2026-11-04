@@ -6,12 +6,14 @@ public class ConsoleIO {
     private static final Scanner scanner = new Scanner(System.in);
 
     static void listerEmployes(ArrayList<Employe> employes){
+        afficherTitre("Liste des employés");
         for (int index = 0; index < employes.size(); index++) {
             System.out.println("[" + (index + 1) + "] " + employes.get(index));
         }
     }
 
     static void listerAnimales(ArrayList<Animal> animales){
+        afficherTitre("Liste des animaux");
         for (int index = 0; index < animales.size(); index++) {
             System.out.println("[" + (index + 1) + "] " + animales.get(index));
         }
@@ -24,6 +26,7 @@ public class ConsoleIO {
     }
 
     static void listerConcours(ArrayList<Concours> concours){
+        afficherTitre("Liste des concours");
         for (int index = 0; index < concours.size(); index++) {
             System.out.println("[" + (index + 1) + "] " + "\n" + "_____________________");
             afficherText(concours.get(index).rendreConcours());
@@ -106,6 +109,10 @@ public class ConsoleIO {
     static void attendreEntree() {
         System.out.print("\nAppuyez sur Enter pour continuer...");
         scanner.nextLine();
+    }
+
+    static void afficherTitre(String titre) {
+        System.out.println("\n--- " + titre + " ---");
     }
 
 }
