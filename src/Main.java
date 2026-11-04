@@ -86,6 +86,17 @@ public class Main {
         return actionsConcours;
     }
 
+    private static ArrayList<OptionElement<Employe>> createActionsEmploye(ArrayList<Employe> employes) {
+        ArrayList<OptionElement<Employe>> actionsEmploye = new ArrayList<>();
+        actionsEmploye.add(new OptionElement<>("Voir les informations",
+                e -> ConsoleIO.afficherText(e.toString())));
+        actionsEmploye.add(new OptionElement<>("Supprimer", e -> {
+            supprimerEmploye(employes, e);
+            ConsoleIO.afficherText(e.getNom() + " a été supprimé.");
+        }));
+        return actionsEmploye;
+    }
+
 
     public static void main(String[] args) {
         ArrayList<Animal> animales = new ArrayList<>();
@@ -118,12 +129,16 @@ public class Main {
 
         ArrayList<OptionElement<Concours>> actionsConcours = createActionsConcours(animales);
         ArrayList<OptionElement<Animal>> actionsAnimal = createActionsAnimal(employes, animales);
+        ArrayList<OptionElement<Employe>> actionsEmploye = createActionsEmploye(employes);
+
 
         ArrayList<Option> menuPrincipale = new ArrayList<>();
         menuPrincipale.add(Option.sousMenu("Choisir un concours", () ->
                 menuElement("Concours", concours, Concours::getNom, () -> ConsoleIO.listerConcours(concours), actionsConcours)));
         menuPrincipale.add(Option.sousMenu("Choisir un animal", () ->
                 menuElement("Animal", animales, Animal::getNom, () -> ConsoleIO.listerAnimales(animales), actionsAnimal)));
+        menuPrincipale.add(Option.sousMenu("Choisir un employé", () ->
+                menuElement("Animal", employes, Employe::getNom, () -> ConsoleIO.listerEmployes(employes), actionsEmploye)));
         menuPrincipale.add(new Option("Créer un concours", () -> concours.add(ConsoleIO.saisirConcours())));
 
         executerMenu("Menu principal", menuPrincipale, "Sortir");
