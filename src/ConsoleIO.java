@@ -45,6 +45,19 @@ public class ConsoleIO {
         }
     }
 
+    static <T> T choisir(ArrayList<T> elements, Runnable afficherListe) {
+        if (elements.isEmpty()) {
+            System.out.println("La liste est vide.");
+            return null;
+        }
+        afficherListe.run();
+        int choix = lireChoix("Numéro (0 pour annuler) : ", 0, elements.size());
+        if (choix == 0) {
+            return null;
+        }
+        return elements.get(choix - 1);
+    }
+
     static String demanderString(String message){
         System.out.println(message);
         boolean valide = false;
