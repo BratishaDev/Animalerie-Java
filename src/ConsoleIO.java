@@ -48,6 +48,7 @@ public class ConsoleIO {
     static <T> T choisir(ArrayList<T> elements, Runnable afficherListe) {
         if (elements.isEmpty()) {
             System.out.println("La liste est vide.");
+            attendreEntree();
             return null;
         }
         afficherListe.run();
@@ -103,7 +104,7 @@ public class ConsoleIO {
     }
 
     static void attendreEntree() {
-        System.out.print("\nAppuyez sur Entrée pour continuer...");
+        System.out.print("\nAppuyez sur Enter pour continuer...");
         scanner.nextLine();
     }
 
