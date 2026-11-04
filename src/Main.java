@@ -53,21 +53,53 @@ public class Main {
         executerMenu(titre, options, "Retour");
     }
 
+    private static ArrayList<OptionElement<Animal>> createActionsAnimal(ArrayList<Employe> employes, ArrayList<Animal> animales) {
+        ArrayList<OptionElement<Animal>> actionsAnimal = new ArrayList<>();
+        actionsAnimal.add(new OptionElement<>("Faire effectuer une tâche", a -> {
+            Employe e = ConsoleIO.choisir(employes, () -> ConsoleIO.listerEmployes(employes));
+            if (e != null) {
+                effectuerTache(e, a);
+            }
+        }));
+        actionsAnimal.add(new OptionElement<>("Supprimer", a -> {
+            supprimerAnimal(animales, a);
+            ConsoleIO.afficherText(a.getNom() + " a été supprimé.");
+        }));
+        return actionsAnimal;
+    }
+
+    private static ArrayList<OptionElement<Concours>> createActionsConcours(ArrayList<Animal> animales) {
+        ArrayList<OptionElement<Concours>> actionsConcours = new ArrayList<>();
+        actionsConcours.add(new OptionElement<>("Voir les informations",
+                c -> ConsoleIO.afficherText(c.rendreConcours())));
+        actionsConcours.add(new OptionElement<>("Inscrire un animal", c -> {
+            Animal a = ConsoleIO.choisir(animales, () -> ConsoleIO.listerAnimales(animales));
+            if (a != null) {
+                ConsoleIO.afficherText(c.inscrireAnimal(a).message());
+            }
+        }));
+        actionsConcours.add(new OptionElement<>("Lancer le concours",
+                c -> ConsoleIO.afficherText(c.lancerConcours().message())));
+        actionsConcours.add(new OptionElement<>("Voir le classement",
+                c -> ConsoleIO.afficherText(c.rendreClassement().message())));
+        return actionsConcours;
+    }
+
 
     public static void main(String[] args) {
         ArrayList<Animal> animales = new ArrayList<>();
         ArrayList<Employe> employes = new ArrayList<>();
         ArrayList<Concours> concours = new ArrayList<>();
+
+        ajouterAnimal(animales, new Chat("Masya", 1, EtatSante.SOIN_LEGER));
+        ajouterAnimal(animales, new Chat("Luba", 3, EtatSante.SOIN_INTENSIF));
+        ajouterAnimal(animales, new Lapin("Zaika", 1, EtatSante.SAIN));
+        ajouterAnimal(animales, new Chien("Spike", 3, EtatSante.SAIN));
+
+        ajouterEmploye(employes, new Soigneur("Gigachad", "Bob", 5000));
+        ajouterEmploye(employes, new Veterinaire("Sydorov", "Lexa", 8000 ));
+        ajouterEmploye(employes, new Soigneur("Tihonov", "Maxim", 5000));
 /*
-        ajouterAnimal(Animales, new Chat("Murka", 7, EtatSante.SOIN_INTENSIF));
-        ajouterAnimal(Animales, new Chat("Jorik", 3, EtatSante.SOIN_LEGER));
-        ajouterAnimal(Animales, new Lapin("Morkov", 2, EtatSante.SAIN));
-        ajouterAnimal(Animales, new Chien("persik", 5, EtatSante.SOIN_INTENSIF));
-
-        ajouterEmploye(Employes, new Soigneur("Gigachad", "Bob", 5000));
-        ajouterEmploye(Employes, new Veterinaire("Sydorov", "Lexa", 8000 ));
-        ajouterEmploye(Employes, new Soigneur("Tihonov", "Maxim", 5000));
-
         ConsoleIO.listerEmployes(Employes);
         ConsoleIO.listerAnimales(Animales);
 
@@ -81,12 +113,20 @@ public class Main {
         concours1.inscrireAnimal(new Chat("Murka", 7, EtatSante.SAIN));
         concours1.inscrireAnimal(new Chat("Mur", 1, EtatSante.SAIN));
 
-       concours.add(concours1);
+        concours.add(concours1);
+
+        ArrayList<OptionElement<Concours>> actionsConcours = createActionsConcours(animales);
+        ArrayList<OptionElement<Animal>> actionsAnimal = createActionsAnimal(employes, animales);
 
         ArrayList<Option> menuPrincipale = new ArrayList<>();
-        menuPrincipale.add(new Option("Lister les concours", () -> ConsoleIO.listerConcours(concours)));
+        menuPrincipale.add(Option.sousMenu("Choisir un concours", () ->
+                menuElement("Concours", concours, () -> ConsoleIO.listerConcours(concours), actionsConcours)));
+        menuPrincipale.add(Option.sousMenu("Choisir un animal", () ->
+                menuElement("Animal", animales, () -> ConsoleIO.listerAnimales(animales), actionsAnimal)));
         menuPrincipale.add(new Option("Créer un concours", () -> concours.add(ConsoleIO.saisirConcours())));
 
         executerMenu("Menu principal", menuPrincipale, "Sortir");
     }
+
+
 }
