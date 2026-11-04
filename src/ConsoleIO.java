@@ -6,11 +6,15 @@ public class ConsoleIO {
     private static final Scanner scanner = new Scanner(System.in);
 
     static void listerEmployes(ArrayList<Employe> employes){
-        employes.forEach(employe -> System.out.println(employe.toString()));
+        for (int index = 0; index < employes.size(); index++) {
+            System.out.println("[" + (index + 1) + "] " + employes.get(index));
+        }
     }
 
     static void listerAnimales(ArrayList<Animal> animales){
-        animales.forEach(animal -> System.out.println(animal.toString()));
+        for (int index = 0; index < animales.size(); index++) {
+            System.out.println("[" + (index + 1) + "] " + animales.get(index));
+        }
     }
 
     static void listerOptions(ArrayList<Option> options) {
