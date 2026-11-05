@@ -7,30 +7,46 @@ public class ConsoleIO {
 
     static void listerEmployes(ArrayList<Employe> employes){
         afficherTitre("Liste des employés");
-        for (int index = 0; index < employes.size(); index++) {
-            System.out.println("[" + (index + 1) + "] " + employes.get(index));
+        if (employes.isEmpty()) {
+            System.out.println("Aucun employé.");
+        } else {
+            for (int index = 0; index < employes.size(); index++) {
+                System.out.println("[" + (index + 1) + "] " + employes.get(index));
+            }
         }
     }
 
     static void listerAnimales(ArrayList<Animal> animales){
         afficherTitre("Liste des animaux");
-        for (int index = 0; index < animales.size(); index++) {
-            System.out.println("[" + (index + 1) + "] " + animales.get(index));
+        if (animales.isEmpty()) {
+            System.out.println("Aucun animal.");
+        } else {
+            for (int index = 0; index < animales.size(); index++) {
+                System.out.println("[" + (index + 1) + "] " + animales.get(index));
+            }
         }
     }
 
     static void listerOptions(ArrayList<Option> options) {
-        for (int index = 0; index < options.size(); index++) {
-            System.out.println("[" + (index + 1) + "] " + options.get(index).label());
+        if (options.isEmpty()) {
+            System.out.println("Aucun option.");
+        } else {
+            for (int index = 0; index < options.size(); index++) {
+                System.out.println("[" + (index + 1) + "] " + options.get(index).label());
+            }
         }
     }
 
     static void listerConcours(ArrayList<Concours> concours){
         afficherTitre("Liste des concours");
-        for (int index = 0; index < concours.size(); index++) {
-            System.out.println("[" + (index + 1) + "] " + "\n" + "_____________________");
-            afficherText(concours.get(index).rendreConcours());
-            System.out.println("_____________________");
+        if (concours.isEmpty()) {
+            System.out.println("Aucun concours.");
+        } else {
+            for (int index = 0; index < concours.size(); index++) {
+                System.out.println("[" + (index + 1) + "] " + "\n" + "_____________________");
+                afficherText(concours.get(index).rendreConcours());
+                System.out.println("_____________________");
+            }
         }
     }
 
