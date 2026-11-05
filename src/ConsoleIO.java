@@ -122,6 +122,20 @@ public class ConsoleIO {
         return new Concours(nom, lieu, capacite);
     }
 
+    static Animal saisirAnimal(){
+        int choixTypeAnimal = demanderNombreEntier("Choisissez le type d'animal \n [1] Chien \n [2] Chat \n [3] Lapin");
+        String nom = demanderString("Entrer le nom de l'animal:");
+        int age = demanderNombreEntier("Entrer l'age de l'animal:");
+        Animal animal = switch (choixTypeAnimal) {
+            case 1 -> new Chien(nom, age);
+            case 2 -> new Chat(nom, age);
+            case 3 -> new Lapin(nom, age);
+            default -> throw new IllegalStateException("Unexpected value: " + choixTypeAnimal);
+        };
+        System.out.println("L'animal " + nom + " a été crée avec succès.");
+        return animal;
+    }
+
     static void attendreEntree() {
         System.out.print("\nAppuyez sur Enter pour continuer...");
         scanner.nextLine();
