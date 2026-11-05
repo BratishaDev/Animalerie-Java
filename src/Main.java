@@ -139,6 +139,7 @@ public class Main {
                 menuElement("Animal", animales, Animal::getNom, () -> ConsoleIO.listerAnimales(animales), actionsAnimal)));
         menuPrincipale.add(Option.sousMenu("Choisir un employé", () ->
                 menuElement("Employé", employes, Employe::getNom, () -> ConsoleIO.listerEmployes(employes), actionsEmploye)));
+        menuPrincipale.add(new Option("Ajouter un animal", () -> animales.add(ConsoleIO.saisirAnimal())));
         menuPrincipale.add(new Option("Créer un concours", () -> concours.add(ConsoleIO.saisirConcours())));
 
         executerMenu("Menu principal", menuPrincipale, "Sortir");
